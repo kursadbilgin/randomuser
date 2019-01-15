@@ -5,7 +5,7 @@ from randomuser.models import RandomUser
 class RandomUserAdmin(admin.ModelAdmin):
     
     list_display = ('name', 'last_name')
-    list_filter = ('name',)
+    list_filter = ('age',)
     search_fields = ['name',]
 
 admin.site.register(RandomUser, RandomUserAdmin)
