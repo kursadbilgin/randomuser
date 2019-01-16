@@ -5,13 +5,14 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
-        parser.add_argument('count', help="Count", type=str)
+        parser.add_argument('count', help="Count", nargs='*', type=str, default=['5000'])
 
     def handle(self, *args, **options):
-        count = options.get('count', '5000')
-        if int(count) > 5000:
-            count = '5000'
-        res = requests.get('https://randomuser.me/api/?results='  + count)
+        num_list = options.get('count')
+        num = num_list[0]
+        if int(num) > 5000:
+            num[0] = '5000'
+        res = requests.get('https://randomuser.me/api/?results='  + num)
         req = res.json()
         random_users = req.get('results')
         list_ = []
